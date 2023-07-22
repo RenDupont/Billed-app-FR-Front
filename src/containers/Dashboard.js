@@ -86,9 +86,7 @@ export default class {
   }
 
   handleEditTicket(e, bill, bills) {
-    console.log(this.counter);
     if (this.counter === undefined || this.id !== bill.id) this.counter = 0
-    console.log(this.counter);
     if (this.id === undefined || this.id !== bill.id) this.id = bill.id
     if (this.counter % 2 === 0) {
       bills.forEach(b => {
@@ -146,7 +144,13 @@ export default class {
         .html("")
       this.counter ++
     }
-    console.log(bills);
+
+    // Désactive le gestionnaire d'événements de click pour tous les tickets
+    // avant d'en enregistrer de nouveaux
+    bills.forEach(bill => {
+      $(`#open-bill${bill.id}`).off('click');
+    });
+
     bills.forEach(bill => {
       $(`#open-bill${bill.id}`).click((e) => this.handleEditTicket(e, bill, bills))
     })
