@@ -8,7 +8,6 @@ import NewBill from "../containers/NewBill.js"
 import { localStorageMock } from "../__mocks__/localStorage.js"
 import Store from "../__mocks__/store.js"
 import { ROUTES, ROUTES_PATH } from "../constants/routes"
-import router from "../app/Router"
 
 describe("Given I am connected as an employee", () => {
   describe("When I am on NewBill Page", () => {
