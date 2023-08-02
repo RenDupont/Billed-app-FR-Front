@@ -114,5 +114,77 @@ describe("Given I am connected as an employee", () => {
       
       expect(listBills).toEqual(testList)
     })
+    it('should handle corrupted data in formatDate function', async () => {
+      const corruptedBill = {
+        "id": "invalidBillId",
+        "vat": "20",
+        "fileUrl": "https://test.storage.tld/invalid-bill.jpg",
+        "status": "pending",
+        "type": "Invalid Type",
+        "commentary": "corrupted data",
+        "name": "invalid bill",
+        "fileName": "invalid-bill.jpg",
+        "date": "Invalid Date Format",
+        "amount": 100,
+        "commentAdmin": "corruption",
+        "email": "a@a",
+        "pct": 20
+      };
+    
+      const mockedBills = {
+        list() {
+          return Promise.resolve([...bills, corruptedBill]);
+        },
+        create: jest.fn(),
+        update: jest.fn(),
+      };
+    
+      // Mock the localStorage
+      Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+      window.localStorage.setItem('user', JSON.stringify({
+        type: 'Employee'
+      }));
+    
+      const root = document.createElement("div");
+      root.setAttribute("id", "root");
+      document.body.append(root);
+    
+      router();
+      window.onNavigate(ROUTES_PATH.Bills);
+    
+      const bill = new Bills({
+        document, onNavigate, store: { bills: () => mockedBills }, localStorage: window.localStorage // Adjusted the 'store' property
+      });
+    
+      const listBills = await bill.getBills();
+    
+      const foundCorruptedBill = listBills.find((bill) => bill.id === corruptedBill.id);
+    
+      expect(foundCorruptedBill).toBeDefined();
+    });
+    it('should navigate to NewBill page when "New Bill" button is clicked', () => {
+      Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+      window.localStorage.setItem('user', JSON.stringify({
+        type: 'Employee'
+      }));
+    
+      const root = document.createElement("div");
+      root.setAttribute("id", "root");
+      document.body.append(root);
+    
+      router();
+      window.onNavigate(ROUTES_PATH.Bills);
+    
+      const bill = new Bills({
+        document, onNavigate, store: Store, localStorage: window.localStorage
+      });
+    
+      const onNavigateSpy = jest.spyOn(bill, 'onNavigate');
+    
+      const buttonNewBill = document.querySelector(`button[data-testid="btn-new-bill"]`);
+      fireEvent.click(buttonNewBill);
+    
+      expect(onNavigateSpy).toHaveBeenCalledWith(ROUTES_PATH['NewBill']);
+    });
   })
 })
