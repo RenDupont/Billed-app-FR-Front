@@ -57,10 +57,9 @@
 .icon-actions {
   display: flex;
   -webkit-box-pack: justify;
-  -webkit-justify-content: space-around;
   -ms-flex-pack: justify;
-  justify-content: space-around;
   align-items: center;
+  padding-left: 16px;
 }
 
 .table td, .table th {
