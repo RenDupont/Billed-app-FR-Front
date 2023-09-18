@@ -1,0 +1,21 @@
+
+.kasa-background {
+    background-image: url('../assets/IMG.png');
+    background-repeat: no-repeat;
+    width: 1240px;
+    height: 223px;
+    background-position-y: -300px;
+    border-radius: 25px;
+    filter: brightness(70%);
+}
+
+.kasa-background p {
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 142.6%;
+    text-align: center;
+    padding-top: 70px;
+}

@@ -1,0 +1,33 @@
+
+.kasa-header {
+    display: flex;
+    width: 1240px;
+    height: 68px;
+    justify-content: space-between;
+    align-items: center;
+    gap: 720.678px;
+}
+
+.kasa-header img {
+    width: 210.322px;
+    height: 68px;
+    flex-shrink: 0;
+}
+
+.kasa-header_nav {
+    display: flex;
+    align-items: flex-start;
+    gap: 57px;
+}
+
+.kasa-header_nav a {
+    color: #FF6060;
+    color: #FF6060;
+    text-align: right;
+    font-family: Montserrat;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 142.6%; /* 34.224px */
+    text-decoration-line: none;
+}
